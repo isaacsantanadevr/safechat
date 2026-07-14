@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SafeChat</title>
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <main class="container">
+
+        <section id="login-screen" class="card">
+            <h1>SafeChat</h1>
+
+            <p>Digite seu nome para entrar na conversa.</p>
+
+            <input
+                id="username"
+                type="text"
+                maxlength="30"
+                placeholder="Seu nome"
+                autocomplete="off"
+            >
+
+            <button id="enter-button" type="button">
+                Entrar no chat
+            </button>
+
+            <p id="connection-error" class="error"></p>
+        </section>
+
+        <section id="chat-screen" class="chat hidden">
+
+            <header class="chat-header">
+                <div>
+                    <h1>SafeChat</h1>
+
+                    <p>
+                        Conectado como
+                        <strong id="current-user"></strong>
+                    </p>
+                </div>
+
+                <span class="status">Online</span>
+            </header>
+
+            <ul id="messages" class="messages"></ul>
+
+            <form id="message-form" class="message-form">
+                <input
+                    id="message-input"
+                    type="text"
+                    maxlength="500"
+                    placeholder="Digite uma mensagem..."
+                    autocomplete="off"
+                >
+
+                <button type="submit">
+                    Enviar
+                </button>
+            </form>
+
+        </section>
+
+    </main>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js">
+    </script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js">
+    </script>
+
+    <script src="/chat.js"></script>
+</body>
+</html>
