@@ -20,10 +20,13 @@ function conectar() {
 
     if (!username) {
         connectionError.textContent = "Digite um nome.";
+        usernameInput.focus();
         return;
     }
 
     connectionError.textContent = "";
+    enterButton.disabled = true;
+    enterButton.textContent = "Conectando...";
 
     const socket = new SockJS("/ws");
 
@@ -59,13 +62,21 @@ function conectadoComSucesso() {
     loginScreen.classList.add("hidden");
     chatScreen.classList.remove("hidden");
 
+    enterButton.disabled = false;
+    enterButton.textContent = "Entrar no chat";
+
     messageInput.focus();
 }
 
 
-function erroNaConexao() {
+function erroNaConexao(error) {
+    console.error("Erro na conexão WebSocket:", error);
+
     connectionError.textContent =
         "Não foi possível conectar ao servidor.";
+
+    enterButton.disabled = false;
+    enterButton.textContent = "Entrar no chat";
 }
 
 
@@ -74,7 +85,12 @@ function enviarMensagem(event) {
 
     const content = messageInput.value.trim();
 
-    if (!content || !stompClient) {
+    if (!content) {
+        return;
+    }
+
+    if (!stompClient || !stompClient.connected) {
+        alert("Você não está conectado ao servidor.");
         return;
     }
 
@@ -94,7 +110,14 @@ function enviarMensagem(event) {
 
 
 function receberMensagem(payload) {
-    const message = JSON.parse(payload.body);
+    let message;
+
+    try {
+        message = JSON.parse(payload.body);
+    } catch (error) {
+        console.error("Mensagem inválida recebida:", error);
+        return;
+    }
 
     const item = document.createElement("li");
 
@@ -112,6 +135,29 @@ function receberMensagem(payload) {
 
         item.appendChild(sender);
         item.appendChild(content);
+
+        if (message.moderated) {
+            const moderationNotice = document.createElement("small");
+
+            moderationNotice.classList.add("moderation-notice");
+            moderationNotice.textContent =
+                "Mensagem moderada automaticamente";
+
+            item.appendChild(moderationNotice);
+        }
+
+        if (message.moderationUnavailable) {
+            const unavailableNotice = document.createElement("small");
+
+            unavailableNotice.classList.add(
+                "moderation-unavailable"
+            );
+
+            unavailableNotice.textContent =
+                "Serviço de moderação indisponível";
+
+            item.appendChild(unavailableNotice);
+        }
     }
 
     messages.appendChild(item);
@@ -119,7 +165,10 @@ function receberMensagem(payload) {
 }
 
 
-enterButton.addEventListener("click", conectar);
+enterButton.addEventListener(
+    "click",
+    conectar
+);
 
 messageForm.addEventListener(
     "submit",

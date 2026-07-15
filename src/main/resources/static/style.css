@@ -50,6 +50,7 @@ input {
 .card input:focus,
 .message-form input:focus {
     border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
 .card button {
@@ -63,10 +64,18 @@ button {
     background: #2563eb;
     color: #ffffff;
     cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        opacity 0.2s ease;
 }
 
-button:hover {
+button:hover:not(:disabled) {
     background: #1d4ed8;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
 }
 
 .chat {
@@ -83,6 +92,7 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
     padding: 18px 24px;
     border-bottom: 1px solid #e5e7eb;
     background: #ffffff;
@@ -99,6 +109,7 @@ button:hover {
 }
 
 .status {
+    flex-shrink: 0;
     padding: 6px 10px;
     border-radius: 999px;
     background: #dcfce7;
@@ -114,6 +125,7 @@ button:hover {
     padding: 24px;
     list-style: none;
     background: #f8fafc;
+    scroll-behavior: smooth;
 }
 
 .message {
@@ -122,9 +134,11 @@ button:hover {
     margin-bottom: 14px;
     padding: 12px 14px;
     background: #e2e8f0;
+    border: 1px solid transparent;
     border-radius: 10px;
     line-height: 1.4;
     word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .message strong {
@@ -133,11 +147,44 @@ button:hover {
     color: #1d4ed8;
 }
 
+.message span {
+    display: block;
+    white-space: pre-wrap;
+}
+
 .system-message {
     margin-bottom: 12px;
     text-align: center;
     color: #64748b;
     font-size: 14px;
+}
+
+.moderation-notice,
+.moderation-unavailable {
+    display: block;
+    margin-top: 8px;
+    padding-top: 7px;
+    border-top: 1px solid rgba(100, 116, 139, 0.25);
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.moderation-notice {
+    color: #b45309;
+}
+
+.moderation-unavailable {
+    color: #b91c1c;
+}
+
+.message:has(.moderation-notice) {
+    border-color: #fbbf24;
+    background: #fffbeb;
+}
+
+.message:has(.moderation-unavailable) {
+    border-color: #fca5a5;
+    background: #fef2f2;
 }
 
 .message-form {
@@ -150,6 +197,7 @@ button:hover {
 
 .message-form input {
     flex: 1;
+    min-width: 0;
     padding: 12px 14px;
     border: 1px solid #cbd5e1;
     border-radius: 8px;
@@ -174,6 +222,7 @@ button:hover {
     .card {
         width: 92%;
         margin: 70px auto;
+        padding: 24px;
     }
 
     .chat {
@@ -181,7 +230,24 @@ button:hover {
         border-radius: 0;
     }
 
+    .chat-header {
+        padding: 16px;
+    }
+
+    .messages {
+        padding: 16px;
+    }
+
     .message {
         max-width: 90%;
+    }
+
+    .message-form {
+        padding: 12px;
+    }
+
+    .message-form button {
+        padding-right: 14px;
+        padding-left: 14px;
     }
 }
