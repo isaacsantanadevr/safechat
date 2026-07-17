@@ -26,12 +26,16 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
+    height: 100%;
     margin: 0;
-    min-height: 100vh;
+}
+
+body {
     font-family: var(--font-body);
     background: var(--color-bg);
     color: var(--color-text);
+    overflow: hidden;
 }
 
 button,
@@ -40,18 +44,18 @@ input {
 }
 
 .container {
-    min-height: 100vh;
+    height: 100vh;
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* ---------- Tela de login ---------- */
 
 .auth-screen {
     display: flex;
-    min-height: 100vh;
+    height: 100vh;
 }
 
 .auth-panel {
@@ -60,6 +64,7 @@ input {
     align-items: center;
     justify-content: center;
     padding: 48px;
+    overflow-y: auto;
 }
 
 .auth-panel--brand {
@@ -279,10 +284,11 @@ input {
 /* ---------- Tela do chat ---------- */
 
 .chat {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     background: var(--color-bg);
+    overflow: hidden;
 }
 
 .chat-header {
