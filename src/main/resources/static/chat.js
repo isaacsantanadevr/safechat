@@ -126,6 +126,9 @@ function receberMensagem(payload) {
         item.textContent = message.content;
     } else {
         item.classList.add("message");
+        item.classList.add(
+            message.sender === username ? "message--mine" : "message--theirs"
+        );
 
         const sender = document.createElement("strong");
         sender.textContent = message.sender;

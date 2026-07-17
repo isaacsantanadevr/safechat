@@ -9,42 +9,116 @@
 
     <title>SafeChat</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
     <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
     <main class="container">
 
-        <section id="login-screen" class="card">
-            <h1>SafeChat</h1>
+        <section id="login-screen" class="auth-screen">
 
-            <p>Digite seu nome para entrar na conversa.</p>
+            <div class="auth-panel auth-panel--brand">
+                <div class="blob blob--one" aria-hidden="true"></div>
+                <div class="blob blob--two" aria-hidden="true"></div>
 
-            <input
-                id="username"
-                type="text"
-                maxlength="30"
-                placeholder="Seu nome"
-                autocomplete="off"
-            >
+                <div class="brand-content">
+                    <div class="brand-mark" aria-hidden="true">
+                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 28h64a12 12 0 0 1 12 12v26a12 12 0 0 1-12 12H46l-14 14v-14H18a12 12 0 0 1-12-12V40a12 12 0 0 1 12-12z" fill="rgba(255,255,255,0.18)"/>
+                            <path d="M38 12h56a12 12 0 0 1 12 12v26a12 12 0 0 1-12 12H70l-12 12V62H38a12 12 0 0 1-12-12V24a12 12 0 0 1 12-12z" fill="#ffffff"/>
+                            <rect x="34" y="30" width="40" height="5" rx="2.5" fill="#6D28D9" opacity="0.35"/>
+                            <rect x="34" y="42" width="26" height="5" rx="2.5" fill="#6D28D9" opacity="0.35"/>
+                            <g transform="translate(64,56)">
+                                <path d="M20 0 L38 7 V21 C38 33 30 41 20 46 C10 41 2 33 2 21 V7 Z" fill="#2DD4BF"/>
+                                <path d="M11 24 L17 30 L29 16" stroke="#0F3D3A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            </g>
+                        </svg>
+                    </div>
 
-            <button id="enter-button" type="button">
-                Entrar no chat
-            </button>
+                    <h2 class="brand-title">Converse com<br>tranquilidade</h2>
 
-            <p id="connection-error" class="error"></p>
+                    <p class="brand-subtitle">
+                        Um espaço em tempo real onde as conversas ficam
+                        só nas boas ideias.
+                    </p>
+
+                    <div class="trust-pill">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2 L20 5 V11 C20 16.5 16.5 20.8 12 22 C7.5 20.8 4 16.5 4 11 V5 Z" fill="currentColor" opacity="0.25"/>
+                            <path d="M8.5 12 L11 14.5 L15.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Moderação automática contra ofensas
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-panel auth-panel--form">
+                <div class="auth-card">
+                    <div class="auth-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/>
+                            <path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+
+                    <h1>Entrar no SafeChat</h1>
+                    <p class="auth-hint">Sem senha, sem cadastro. Só o seu nome pra começar.</p>
+
+                    <label class="field">
+                        <span class="field-label">Seu nome</span>
+
+                        <span class="field-input">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/>
+                                <path d="M5 19c0-3.3 3.1-5.5 7-5.5s7 2.2 7 5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                            </svg>
+
+                            <input
+                                id="username"
+                                type="text"
+                                maxlength="30"
+                                placeholder="Como podemos te chamar?"
+                                autocomplete="off"
+                            >
+                        </span>
+                    </label>
+
+                    <button id="enter-button" type="button">
+                        Entrar no chat
+                    </button>
+
+                    <p id="connection-error" class="error"></p>
+                </div>
+            </div>
+
         </section>
 
         <section id="chat-screen" class="chat hidden">
 
             <header class="chat-header">
-                <div>
-                    <h1>SafeChat</h1>
+                <div class="chat-header__brand">
+                    <div class="chat-logo" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2 L19 4.6 V10.5 C19 15.2 16 19 12 20.3 C8 19 5 15.2 5 10.5 V4.6 Z" fill="#2DD4BF"/>
+                            <path d="M8.6 11 L11 13.4 L15.4 8.4" stroke="#0F3D3A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
 
-                    <p>
-                        Conectado como
-                        <strong id="current-user"></strong>
-                    </p>
+                    <div>
+                        <h1>SafeChat</h1>
+
+                        <p>
+                            Conectado como
+                            <strong id="current-user"></strong>
+                        </p>
+                    </div>
                 </div>
 
                 <span class="status">Online</span>
@@ -61,8 +135,10 @@
                     autocomplete="off"
                 >
 
-                <button type="submit">
-                    Enviar
+                <button type="submit" aria-label="Enviar mensagem">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 12 L20 4 L14 20 L11 13 L4 12Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+                    </svg>
                 </button>
             </form>
 
